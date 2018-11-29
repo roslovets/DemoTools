@@ -1,2 +1,2 @@
-# MATLAB-FontSizer
+# Font Sizer
 Easily change code font size
