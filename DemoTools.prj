@@ -10,7 +10,7 @@
 3. Integrated ZoomIt
 4. slrtexplr link</param.description>
     <param.screenshot>${PROJECT_ROOT}\demotools-icon.png</param.screenshot>
-    <param.version>1.0</param.version>
+    <param.version>1.1</param.version>
     <param.output>${PROJECT_ROOT}\Demo Tools.mltbx</param.output>
     <param.products.name />
     <param.products.id />
@@ -65,7 +65,6 @@ dev_on.m
       <param.authnamewatermark />
       <param.email />
       <param.company />
-      <param.version />
       <param.output />
       <param.products.name />
       <param.products.id />
