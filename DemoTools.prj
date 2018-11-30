@@ -1,14 +1,17 @@
 <deployment-project plugin="plugin.toolbox" plugin-version="1.0">
-  <configuration file="D:\MATLAB\FontSizer\FontSizer.prj" location="D:\MATLAB\FontSizer" name="FontSizer" target="target.toolbox" target-name="Package Toolbox">
-    <param.appname>FontSizer</param.appname>
+  <configuration file="D:\MATLAB\FontSizer\DemoTools.prj" location="D:\MATLAB\FontSizer" name="DemoTools" target="target.toolbox" target-name="Package Toolbox">
+    <param.appname>Demo Tools</param.appname>
     <param.authnamewatermark>Pavel Roslovets</param.authnamewatermark>
     <param.email>roslovets@exponenta.ru</param.email>
     <param.company>ETMC Exponenta</param.company>
-    <param.summary>Change code font size</param.summary>
-    <param.description>Simple GUI to change size of font in Command Window and Scripts</param.description>
-    <param.screenshot>${PROJECT_ROOT}\fontsizer-icon.png</param.screenshot>
+    <param.summary>Helpers for MATLAB demos</param.summary>
+    <param.description>1. FontSizer: Simple GUI to change size of font in Command Window and Scripts
+2. Cleaner: clean commands and variables
+3. Integrated ZoomIt
+4. slrtexplr</param.description>
+    <param.screenshot>${PROJECT_ROOT}\demotools-icon.png</param.screenshot>
     <param.version>1.0</param.version>
-    <param.output>${PROJECT_ROOT}\FontSizer.mltbx</param.output>
+    <param.output>${PROJECT_ROOT}\Demo Tools.mltbx</param.output>
     <param.products.name />
     <param.products.id />
     <param.products.version />
@@ -38,7 +41,9 @@ dev_on.m
     <param.demosxml />
     <param.apps />
     <param.registered.apps>
-      <file>${PROJECT_ROOT}\FontSizer.mlapp</file>
+      <file>${PROJECT_ROOT}\Presenter.mlapp</file>
+      <file>${PROJECT_ROOT}\PresenterTools.mlapp</file>
+      <file>${PROJECT_ROOT}\DemoTools.mlapp</file>
     </param.registered.apps>
     <param.docs />
     <param.getting.started.guide />
@@ -93,20 +98,28 @@ dev_on.m
       <file>D:\MATLAB\FontSizer</file>
     </fileset.rootdir>
     <fileset.rootfiles>
+      <file>${PROJECT_ROOT}\bin</file>
+      <file>${PROJECT_ROOT}\cleaner-icon.png</file>
+      <file>${PROJECT_ROOT}\Cleaner.m</file>
+      <file>${PROJECT_ROOT}\demotools-icon.png</file>
+      <file>${PROJECT_ROOT}\DemoTools.mlapp</file>
+      <file>${PROJECT_ROOT}\DemoToolsUpdater.m</file>
       <file>${PROJECT_ROOT}\DesktopToolset.xml</file>
       <file>${PROJECT_ROOT}\favorites.png</file>
       <file>${PROJECT_ROOT}\fontsizer-icon.png</file>
       <file>${PROJECT_ROOT}\FontSizer.mlapp</file>
-      <file>${PROJECT_ROOT}\FontSizerUpdater.m</file>
       <file>${PROJECT_ROOT}\README.md</file>
       <file>${PROJECT_ROOT}\resources</file>
+      <file>${PROJECT_ROOT}\slrt-icon.png</file>
       <file>${PROJECT_ROOT}\ToolboxConfig.xml</file>
+      <file>${PROJECT_ROOT}\zoomit-icon.png</file>
+      <file>${PROJECT_ROOT}\ZoomIt.m</file>
     </fileset.rootfiles>
     <fileset.depfun.included />
     <fileset.depfun.excluded />
     <fileset.package />
     <build-deliverables>
-      <file location="D:\MATLAB\FontSizer" name="FontSizer.mltbx" optional="false">D:\MATLAB\FontSizer\FontSizer.mltbx</file>
+      <file location="D:\MATLAB\FontSizer" name="Demo Tools.mltbx" optional="false">D:\MATLAB\FontSizer\Demo Tools.mltbx</file>
     </build-deliverables>
     <workflow />
     <matlab>

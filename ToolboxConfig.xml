@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <config>
-   <name>FontSizer</name>
-   <pname>FontSizer.prj</pname>
+   <name>Demo Tools</name>
+   <pname>DemoTools.prj</pname>
    <ptype>toolbox</ptype>
    <remote>https://github.com/roslovets/MATLAB-FontSizer.git</remote>
-   <updaterv>0.3</updaterv>
+   <updaterv>0.4</updaterv>
 </config>
-<!--FontSizerUpdater configuration file-->
+<!--DemoToolsUpdater configuration file-->

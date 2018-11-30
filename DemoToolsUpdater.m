@@ -1,4 +1,4 @@
-classdef FontSizerUpdater < handle
+classdef DemoToolsUpdater < handle
     % Let you control version of installed toolbox and update it from
     % GitHub remote
     
@@ -15,7 +15,7 @@ classdef FontSizerUpdater < handle
     end
     
     methods
-        function obj = FontSizerUpdater(root)
+        function obj = DemoToolsUpdater(root)
             % Tools Constructor
             if nargin < 1
                 obj.root = fileparts(mfilename('fullpath'));
@@ -99,8 +99,8 @@ classdef FontSizerUpdater < handle
         end
         
         function [uname, upath] = clone(obj)
-            % Clone FontSizerUpdater class to current Project folder
-            TU = FontSizerUpdater(pwd);
+            % Clone DemoToolsUpdater class to current Project folder
+            TU = DemoToolsUpdater(pwd);
             uname = TU.getvalidname + "Updater";
             upath = uname + ".m";
             oname = mfilename('class');
@@ -135,13 +135,14 @@ classdef FontSizerUpdater < handle
             obj.pv = pv;
         end
         
-        function cv = gcv(obj)
+        function [cv, guid] = gcv(obj)
             % Get current installed version
             if obj.ptype == "toolbox"
                 tbx = matlab.addons.toolbox.installedToolboxes;
                 tbx = struct2table(tbx, 'AsArray', true);
                 idx = strcmp(tbx.Name, obj.name);
                 cv = tbx.Version(idx);
+                guid = tbx.Guid(idx);
                 if isscalar(cv)
                     cv = char(cv);
                 elseif isempty(cv)
@@ -185,12 +186,16 @@ classdef FontSizerUpdater < handle
             % Get latest version
             [iv, r] = obj.giv();
             if echo
-                fprintf('Latest version: %s\n', iv);
-                if isequal(cv, iv)
-                    fprintf('You use the latest version\n');
+                if ~isempty(iv)
+                    fprintf('Latest version: %s\n', iv);
+                    if isequal(cv, iv)
+                        fprintf('You use the latest version\n');
+                    else
+                        fprintf('* Update is available: %s->%s *\n', cv, iv);
+                        fprintf('To update run update command\n');
+                    end
                 else
-                    fprintf('* Update is available: %s->%s *\n', cv, iv);
-                    fprintf('To update run update command\n');
+                    fprintf('No remote version is available\n');
                 end
             end
         end
@@ -205,7 +210,43 @@ classdef FontSizerUpdater < handle
             end
         end
         
-        function install(obj, r)
+        function res = install(obj, fpath)
+            % Install toolbox or app
+            if nargin < 2
+                fpath = obj.getbinpath();
+            end            
+            if obj.ptype == "toolbox"
+                res = matlab.addons.install(fpath);
+            else
+                res = matlab.apputil.install(fpath);
+            end
+            obj.gcv();
+            obj.echo('has been installed');
+        end
+        
+        function test(obj)
+            % Build and install
+            obj.build();
+            obj.install();
+        end
+        
+        function uninstall(obj)
+            % Ininstall toolbox or app
+            [~, guid] = obj.gcv();
+            if isempty(guid)
+                disp('Nothing to uninstall');
+            else
+                if obj.ptype == "toolbox"
+                    matlab.addons.uninstall(guid);
+                else
+                    matlab.apputil.uninstall(guid);
+                end
+                disp('Uninstalled successfully');
+                obj.gcv();
+            end
+        end
+        
+        function installweb(obj, r)
             % Download and install latest version from web
             if nargin < 2
                 [~, ~, r] = obj.ver(0);
@@ -216,11 +257,7 @@ classdef FontSizerUpdater < handle
             mkdir(dpath);
             fpath = fullfile(dpath, r.assets.name);
             websave(fpath, r.assets.browser_download_url);
-            if obj.ptype == "toolbox"
-                res = matlab.addons.install(fpath);
-            else
-                res = matlab.apputil.install(fpath);
-            end
+            res = obj.install(fpath);
             fprintf('%s v%s has been installed\n', res.Name{1}, res.Version{1});
             delete(fpath);
         end
@@ -229,7 +266,7 @@ classdef FontSizerUpdater < handle
             % Update installed version to latest
             [~, ~, r] = obj.ver();
             if obj.isupdate()
-                obj.install(r);
+                obj.installweb(r);
             end
         end
         
@@ -291,7 +328,7 @@ classdef FontSizerUpdater < handle
         function [confname, confpath] = writeconfig(obj)
             % Write config to xml file
             docNode = com.mathworks.xml.XMLUtils.createDocument('config');
-            docNode.appendChild(docNode.createComment('FontSizerUpdater configuration file'));
+            docNode.appendChild(docNode.createComment('DemoToolsUpdater configuration file'));
             obj.addxmlitem(docNode, 'name', obj.name);
             obj.addxmlitem(docNode, 'pname', obj.pname);
             obj.addxmlitem(docNode, 'ptype', obj.ptype);
