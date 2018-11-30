@@ -378,7 +378,7 @@ classdef DemoToolsUpdater < handle
                 end
                 obj.pv = pv;
             end
-            bname = strrep(obj.name, ' ', '-');
+            [~, bname] = fileparts(obj.pname);
             bpath = fullfile(obj.root, bname);
             if obj.ptype == "toolbox"
                 obj.seticons();

@@ -3,7 +3,7 @@
    <name>Demo Tools</name>
    <pname>DemoTools.prj</pname>
    <ptype>toolbox</ptype>
-   <remote>https://github.com/roslovets/MATLAB-FontSizer.git</remote>
+   <remote>https://github.com/roslovets/DemoTools.git</remote>
    <updaterv>0.4</updaterv>
 </config>
 <!--DemoToolsUpdater configuration file-->
