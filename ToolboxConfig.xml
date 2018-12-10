@@ -4,6 +4,6 @@
    <pname>DemoTools.prj</pname>
    <ptype>toolbox</ptype>
    <remote>https://github.com/roslovets/DemoTools.git</remote>
-   <updaterv>0.4</updaterv>
+   <extv>1.0</extv>
 </config>
-<!--DemoToolsUpdater configuration file-->
+<!--ToolboxUpdater configuration file-->
